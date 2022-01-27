@@ -1,5 +1,7 @@
 // JENKINSFILE
 
+def app
+
 // Init pipeline
 pipeline {
     agent any
@@ -12,8 +14,6 @@ pipeline {
     options {
         ansiColor('xterm')
     }
-
-    def app
 
     stages {
       //Build image locally
