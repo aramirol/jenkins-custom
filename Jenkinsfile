@@ -38,6 +38,7 @@ pipeline {
                 docker.withRegistry('https://hub.docker.com', '$DOCKER_CREDENTIALS') {
                   app.push("${env.BUILD_NUMBER}")
                   app.push("latest")
+                }
             }
         }
     }
