@@ -35,7 +35,7 @@ pipeline {
         stage("push image") {
           // Push image to remote registry
             steps {
-                docker.withRegistry('https://hub.docker.com', 'hub_docker_credentials') {
+                docker.withRegistry('https://hub.docker.com', '$DOCKER_CREDENTIALS') {
                   app.push("${env.BUILD_NUMBER}")
                   app.push("latest")
             }
