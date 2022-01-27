@@ -40,7 +40,6 @@ RUN apt-get update && \
         openssl \
         python3 python3-dev python3-pip python3-setuptools python3-venv \
         sudo uuid-dev unzip wget && \
-        docker \
     apt-get clean
 
 # Set Timezone as Europe/Madrid
@@ -90,6 +89,13 @@ COPY ansible.cfg /etc/ansible/.
 
 # Install InSpec by Chef
 RUN curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
+
+# Install Docker-CE
+RUN apt install apt-transport-https ca-certificates curl software-properties-common && \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" && \
+    sudo apt update
+    sudo apt install docker-ce
 
 # Jenkins home volume
 VOLUME $JENKINS_HOME
