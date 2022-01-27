@@ -21,24 +21,24 @@ pipeline {
             }
         }
 
-        stage("test image") {
+//        stage("test image") {
           // Logout from hub.docker.com
-            steps {
-                app.inside {
-                  sh 'echo "Tests passed"'
-                }
-            }
-        }
+//            steps {
+//                app.inside {
+//                  sh 'echo "Tests passed"'
+//                }
+//            }
+//        }
 
-        stage("push image") {
+//        stage("push image") {
           // Push image to remote registry
-            steps {
-                docker.withRegistry('https://hub.docker.com', '$DOCKER_CREDENTIALS') {
-                  app.push("${env.BUILD_NUMBER}")
-                  app.push("latest")
-                }
-            }
-        }
+//            steps {
+//                docker.withRegistry('https://hub.docker.com', '$DOCKER_CREDENTIALS') {
+//                  app.push("${env.BUILD_NUMBER}")
+//                  app.push("latest")
+//                }
+//            }
+//        }
     }
 
     post {
