@@ -1,7 +1,7 @@
 // JENKINSFILE
 
 // Init pipeline
-pipeline{
+pipeline {
     agent any
 
     environment {
