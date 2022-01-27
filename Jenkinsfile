@@ -38,7 +38,9 @@ pipeline {
         stage("push image") {
           // Push image to remote registry
             steps {
-                sh "docker push aramirol/jenkins-custom:x.x.x"
+                sh """
+                docker push aramirol/jenkins-custom:x.x.x
+                """
             }
         }
 
@@ -46,6 +48,17 @@ pipeline {
           // Logout from hub.docker.com
             steps {
                 sh "docker logout"
+            }
+        }
+
+        stage("logout docker hub") {
+          // Delete temporal images
+            steps {
+                sh """
+                chmod 700 rmi.sh
+                ./rmi.sh
+                chmod 644 rmi.sh
+                """
             }
         }
     }
