@@ -1,29 +1,12 @@
 // JENKINSFILE
 
-// Defining AWS Credentials
-def credentialsForTestWrapper(block) {
-    withCredentials([
-        [
-            $class: 'AmazonWebServicesCredentialsBinding',
-            credentialsId: "aws_test",
-            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-            //secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ],
-        [
-            $class: 'AmazonWebServicesCredentialsBinding',
-            credentialsId: "aws_test",
-            //accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ],
-    ])
-    {
-        block.call()
-    }
-}
-
 // Init pipeline
 pipeline{
     agent any
+
+    environment {
+        DOCKER_CREDENTIALS = crendetials('hub-docker-credentials')
+    }
 
     options {
         ansiColor('xterm')
@@ -32,55 +15,42 @@ pipeline{
     stages {
         stage("build image") {
             steps {
-              credentialsForTestWrapper {
-                  sh """
-                  docker build --tag aramirol/jenkins-custom:x.x.x .
-                  """
-              }
+                sh """
+                docker build --tag aramirol/jenkins-custom:x.x.x .
+                """
             }
         }
       
-
         stage("tag image") {
             steps {
-              credentialsForTestWrapper {
-                  sh """
-                  docker tag aramirol/jenkins-custom:x.x.x aramirol/jenkins-custom:latest
-                  """
-              }
+                sh """
+                docker tag aramirol/jenkins-custom:x.x.x aramirol/jenkins-custom:latest
+                """
             }
         }
 
         stage("login docker hub") {
             steps {
-              credentialsForTestWrapper {
-                  sh """
-                  docker login -u <<username>> -p <<password>>
-                  """
-              }
+                sh """
+                docker login -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW
+                """
             }
         }
 
         stage("push image") {
             steps {
-              credentialsForTestWrapper {
-                  sh """
-                  docker push aramirol/jenkins-custom:x.x.x
-                  docker push aramirol/jenkins-custom:latest
-                  """
-              }
+                sh """
+                docker push aramirol/jenkins-custom:x.x.x
+                """
             }
         }
-
     }
 
     post {
         always {
-            credentialsForTestWrapper {
-              sh """
-              docker logout
-              """
-            }
+            sh """
+            docker logout
+            """
         }
         cleanup {
             cleanWs()
