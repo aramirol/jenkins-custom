@@ -51,7 +51,7 @@ pipeline {
             }
         }
 
-        stage("logout docker hub") {
+        stage("delete images") {
           // Delete temporal images
             steps {
                 sh """
