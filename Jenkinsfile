@@ -4,9 +4,9 @@
 pipeline {
     agent any
 
-    //environment {
+    environment {
     //    DOCKER_CREDENTIALS = credentials('hub-docker-credentials')
-    //}
+    }
 
     options {
         ansiColor('xterm')
