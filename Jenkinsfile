@@ -1,7 +1,5 @@
 // JENKINSFILE
 
-def app
-
 // Init pipeline
 pipeline {
     agent any
@@ -19,7 +17,7 @@ pipeline {
       //Build image locally
         stage("build image") {
             steps {
-               app = docker.build("aramirol/jenkins-custom")
+               def app = docker.build("aramirol/jenkins-custom")
             }
         }
 
