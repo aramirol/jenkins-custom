@@ -36,12 +36,15 @@ pipeline {
                 sh "docker push aramirol/jenkins-custom:x.x.x"
             }
         }
+
+        stage("logout docker hub") {
+            steps {
+                sh "docker logout"
+            }
+        }
     }
 
     post {
-        always {
-            sh "docker logout"
-        }
         cleanup {
             cleanWs()
         }
