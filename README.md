@@ -21,10 +21,10 @@ docker tag source:tag target:tag
 
 ## Example
 ```sh
-$ git clone https://github.com/aramirol/casare-homelab.git
+$ git clone https://github.com/aramirol/jenkins-custom.git
 ```
 ```sh
-$ cd casare-homelab/jenkins/jenkins-custom
+$ cd jenkins-custom/
 ```
 ```sh
 $ docker build --tag aramirol/jenkins-custom:x.x.x .
@@ -42,7 +42,7 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 Login Succeeded
 ```
 ```sh
-$ docker push aramirol/jenkins-custom:1.0
+$ docker push aramirol/jenkins-custom:1.0.0
 ```
 ```sh
 $ docker push aramirol/jenkins-custom:latest
