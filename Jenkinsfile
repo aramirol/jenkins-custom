@@ -17,7 +17,10 @@ pipeline {
       //Build image locally
         stage("build image") {
             steps {
-               app = docker.build("aramirol/jenkins-custom")
+              script {
+                app = docker.build("aramirol/jenkins-custom")
+              }
+               
             }
         }
 
