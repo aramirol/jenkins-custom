@@ -117,7 +117,7 @@ RUN sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sourc
 
 RUN apt update
 
-RUN apt install jenkins
+RUN apt install -y jenkins
 
 # for main web interface:
 EXPOSE ${http_port}
