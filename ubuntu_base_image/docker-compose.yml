@@ -1,0 +1,12 @@
+version: '3'
+services:
+  jenkins:
+    image: 'aramirol/jenkins-custom:0.0.1'
+    container_name: 'jenkins-casare-int'
+    hostname: 'jenkins-casare-int'
+    restart: always
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - '/data/jenkins_custom/jenkins_home_new:/var/jenkins_home'
