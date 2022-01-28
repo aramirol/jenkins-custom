@@ -94,8 +94,6 @@ COPY ansible.cfg /etc/ansible/.
 # InSpec by Chef for terraform testing
 RUN curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
 
-# Install Jenkins
-
 # Jenkins is run with user `jenkins`, uid = 1000
 # If you bind mount a volume from the host or a data container,
 # ensure you use the same uid
@@ -111,12 +109,10 @@ VOLUME $JENKINS_HOME
 # or config file with your custom jenkins Docker image.
 RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
 
+# Install Jenkins
 RUN wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
-
 RUN sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-
 RUN apt update
-
 RUN apt install -y jenkins
 
 # for main web interface:
@@ -124,19 +120,6 @@ EXPOSE ${http_port}
 
 # will be used by attached slave agents:
 EXPOSE ${agent_port}
-
-ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
-
-COPY jenkins-support /usr/local/bin/jenkins-support
-COPY jenkins.sh /usr/local/bin/jenkins.sh
-COPY tini-shim.sh /bin/tini
-RUN chown -R ${user} /usr/local/bin/jenkins.sh && chmod +x /usr/local/bin/jenkins.sh
-USER ${user}
-ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
-
-# from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
-COPY plugins.sh /usr/local/bin/plugins.sh
-COPY install-plugins.sh /usr/local/bin/install-plugins.sh
 
 USER root
 
