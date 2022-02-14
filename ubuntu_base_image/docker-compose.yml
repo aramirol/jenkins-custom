@@ -9,4 +9,4 @@ services:
       - "8080:8080"
       - "50000:50000"
     volumes:
-      - '/data/jenkins_custom/jenkins_home_new:/var/jenkins_home'
+      - '/data/jenkins_custom/jenkins_home:/var/jenkins_home'
