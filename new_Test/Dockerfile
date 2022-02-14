@@ -1,4 +1,4 @@
-FROM adoptopenjdk:11-jdk-openj9-bionic
+FROM jenkins/jenkins:jdk11
 
 USER root
 
@@ -23,7 +23,7 @@ ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 ENV ANSIBLE_HOME /home/ansible
 ENV TERRAFORM_VERSION=1.0.9
 
-# Install OS packages
+# Install OS packeges
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
         apt-utils \
@@ -45,14 +45,11 @@ RUN apt-get update && \
 # Set Timezone as Europe/Madrid
 RUN echo "Europe/Madrid" > /etc/timezone
 
-# Copy bash_profile
-COPY bash_profile /var/jenkins_home/.bash_profile
-
 # Install and Upgrade pip
 RUN pip3 install --upgrade pip setuptools wheel
 
 # Install Ansible
-RUN pip3 install 'ansible==2.10.4' passlib jmespath kerberos pywinrm  requests_kerberos xmltodict
+RUN pip3 install 'ansible==2.10.4' passlib jmespath kerberos pywinrm requests_kerberos xmltodict
 
 # Install Terraform
 RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
@@ -80,8 +77,7 @@ RUN wget https://get.helm.sh/helm-v3.4.0-linux-amd64.tar.gz && \
 RUN wget https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz && \
     tar -xzf openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz && \
     chmod +x openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit/oc && \
-    mv openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit/oc /usr/bin/ && \
-    /usr/bin/oc completion bash > /etc/bash_completion.d/oc
+    mv openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit/oc /usr/bin/
 
 # Add groups to sudoers
 RUN groupadd -g ${ansible_gid} ${ansible_group} \
@@ -91,29 +87,21 @@ RUN groupadd -g ${ansible_gid} ${ansible_group} \
 
 COPY ansible.cfg /etc/ansible/.
 
-# InSpec by Chef for terraform testing
+# Install InSpec by Chef
 RUN curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
 
-# Jenkins is run with user `jenkins`, uid = 1000
-# If you bind mount a volume from the host or a data container,
-# ensure you use the same uid
-RUN mkdir -p $JENKINS_HOME \
-  && chown ${uid}:${gid} $JENKINS_HOME \
-  && groupadd -g ${gid} ${group} \
-  && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
+# Install Docker-CE
+RUN apt install -y apt-transport-https ca-certificates curl software-properties-common && \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" && \
+    apt update && \
+    apt install -y docker-ce
 
+# Add jenkins user to docker group
+RUN usermod -aG docker jenkins
+
+# Jenkins home volume
 VOLUME $JENKINS_HOME
-
-# `/usr/share/jenkins/ref/` contains all reference configuration we want
-# to set on a fresh new installation. Use it to bundle additional plugins
-# or config file with your custom jenkins Docker image.
-RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
-
-# Install Jenkins
-RUN wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
-RUN sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-RUN apt update
-RUN apt install -y jenkins
 
 # for main web interface:
 EXPOSE ${http_port}
@@ -121,16 +109,4 @@ EXPOSE ${http_port}
 # will be used by attached slave agents:
 EXPOSE ${agent_port}
 
-USER root
-
-# Install Docker-CE
-#RUN apt install -y apt-transport-https ca-certificates curl software-properties-common && \
-#    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
-#    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" && \
-#    apt update && \
-#    apt install -y docker-ce
-
-# Add jenkins user to docker group
-#RUN usermod -aG docker jenkins
-
-user ${user}
+USER ${user}

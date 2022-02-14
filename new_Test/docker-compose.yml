@@ -1,7 +1,7 @@
 version: '3'
 services:
   jenkins:
-    image: 'aramirol/jenkins-custom:test'
+    image: 'jenkins/jenkins:lts-jdk11'
     container_name: 'jenkins-casare-int'
     hostname: 'jenkins-casare-int'
     restart: always
