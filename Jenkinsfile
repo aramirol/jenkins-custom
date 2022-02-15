@@ -16,7 +16,6 @@ pipeline {
               DOCKER_CREDENTIALS = credentials('hub_docker_credentials')
             }
             steps {
-              sh "echo $DOCKER_CREDENTIALS_USR"
               sh "echo $DOCKER_CREDENTIALS_PWD"
             }
         }
