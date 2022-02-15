@@ -1,6 +1,8 @@
 # jenkins-custom
 
-[![Jenkins](https://img.shields.io/badge/jenkins_custom-latest-red?logo=jenkins)](https://hub.docker.com/r/aramirol/jenkins-custom)
+[![Docker Image CI](https://github.com/aramirol/jenkins-custom/actions/workflows/docker-image.yml/badge.svg)](https://github.com/aramirol/jenkins-custom/actions/workflows/docker-image.yml)
+[![Jenkins](https://img.shields.io/badge/jenkins_custom-latest-red?logo=jenkins&logoColor=white)](https://hub.docker.com/r/aramirol/jenkins-custom)
+
 
 Custom Jenkins image that is a customization of the official image by adding the necessary packages to deploy with Ansible and Terraform. In addition, packages have been added to perform testing tasks with Pytest and InSpec. It also includes packages like Kubectl and Helm for deployments on top of K8s.
 
