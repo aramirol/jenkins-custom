@@ -4,44 +4,57 @@
 pipeline {
     agent any
 
+    options {
+        ansiColor('xterm')
+    }
+
     environment {
         // Login credentialsID
         DOCKER_CREDENTIALS = credentials('hub_docker_credentials')
     }
 
-    options {
-        ansiColor('xterm')
-    }
-
     stages {
-      //Build image locally
-        stage("build image") {
+      // Login to hub.docker.com with personal credentials
+        stage("login docker hub") {
             steps {
-              script {
-                app = docker.build("aramirol/jenkins-custom")
-              }
-               
+              sh {
+                "docker login -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PWD"
+              }      
             }
         }
+    }
 
-//        stage("test image") {
-          // Logout from hub.docker.com
+//    stages {
+//      //Build image locally
+//        stage("build tag image") {
 //            steps {
-//                app.inside {
-//                  sh 'echo "Tests passed"'
-//                }
+//              sh {
+//                "docker build --tag aramirol/jenkins-custom:${VAR} ."
+//              }      
 //            }
 //        }
+//    }
 
-//        stage("push image") {
-          // Push image to remote registry
+//    stages {
+//      //Build image locally
+//        stage("build latest image") {
 //            steps {
-//                docker.withRegistry('https://hub.docker.com', '$DOCKER_CREDENTIALS') {
-//                  app.push("${env.BUILD_NUMBER}")
-//                  app.push("latest")
-//                }
+//              sh {
+//                "docker build --tag aramirol/jenkins-custom:latest ."
+//              }      
 //            }
 //        }
+//    }
+
+    stages {
+      // Logout from hub.docker.com
+        stage("logout docker hub") {
+            steps {
+              sh {
+                "docker logout"
+              }      
+            }
+        }
     }
 
     post {
