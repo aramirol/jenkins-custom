@@ -17,7 +17,8 @@ pipeline {
       // Login to hub.docker.com with personal credentials
         stage("login docker hub") {
             steps {
-              sh "docker login -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PWD"     
+              sh "echo $DOCKER_CREDENTIALS_USR" 
+              sh "echo $DOCKER_CREDENTIALS_PWD"     
             }
         }
 
@@ -42,7 +43,7 @@ pipeline {
       // Logout from hub.docker.com
         stage("logout docker hub") {
             steps {
-              sh "docker logout"      
+              //sh "docker logout"      
             }
         }
     }
