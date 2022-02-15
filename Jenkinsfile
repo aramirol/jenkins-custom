@@ -17,7 +17,7 @@ pipeline {
       // Login to hub.docker.com with personal credentials
         stage("login docker hub") {
             steps {
-              sh"docker login -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PWD"     
+              sh "docker login -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PWD"     
             }
         }
     }
