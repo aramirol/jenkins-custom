@@ -45,7 +45,7 @@ pipeline {
       // Logout from hub.docker.com
         stage("logout docker hub") {
             steps {
-              //sh "docker logout"      
+              sh "echo adios"      
             }
         }
     }
