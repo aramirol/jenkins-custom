@@ -20,17 +20,6 @@ pipeline {
             }
         }
 
-        stage("prompt for input") {
-            steps {
-              script {
-                env.TAG = input message: 'Please, enter the image tag:'
-                              parameters: [string(defaultValue: '',
-                                          description: '',
-                                          tag: 'tag')]
-              }
-            }
-        }
-
       //Build image locally
         stage("build tag image") {
             steps {
