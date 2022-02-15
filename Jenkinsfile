@@ -34,28 +34,28 @@ pipeline {
       //Build image locally
         stage("build tag image") {
             steps {
-              sh "docker build --tag aramirol/jenkins-custom:${env.TAG} ."
+              sh "docker build -q --tag aramirol/jenkins-custom:${env.TAG} ."
             }
         }
 
       //Push image to hub.docker.com
         stage("push tag image") {
             steps {
-              sh "docker push aramirol/jenkins-custom:${env.TAG}"
+              sh "docker push -q aramirol/jenkins-custom:${env.TAG}"
             }
         }
 
       //Build image locally
         stage("build latest image") {
             steps {
-              sh "docker build --tag aramirol/jenkins-custom:latest ."
+              sh "docker build -q --tag aramirol/jenkins-custom:latest ."
             }
         }
 
       //Push image to hub.docker.com
         stage("push latest image") {
             steps {
-              sh "docker push aramirol/jenkins-custom:latest"
+              sh "docker push -q aramirol/jenkins-custom:latest"
             }
         }
 
