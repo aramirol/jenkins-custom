@@ -17,8 +17,10 @@ pipeline {
       // Login to hub.docker.com with personal credentials
         stage("login docker hub") {
             steps {
-              sh "echo $DOCKER_CREDENTIALS_USR" 
-              sh "echo $DOCKER_CREDENTIALS_PWD"     
+              sh """
+              echo $DOCKER_CREDENTIALS_USR"
+              echo $DOCKER_CREDENTIALS_PWD"
+              """
             }
         }
 
