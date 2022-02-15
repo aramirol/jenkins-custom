@@ -13,7 +13,7 @@ pipeline {
         stage("login docker hub") {
             environment {
               // Login credentialsID
-              DOCKER_CREDENTIALS = credentials('hub_docker_credentials')
+              DOCKER_CREDENTIALS_USR = credentials('hub_docker_credentials')
             }
             steps {
               sh "echo $DOCKER_CREDENTIALS_USR"
