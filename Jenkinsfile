@@ -66,13 +66,12 @@ pipeline {
             }
         }
 
-      // Clean temp images
-        stage("clean temp images") {
+      // Prune old images
+        stage("prune old images") {
             steps {
               sh """
-              chmod 770 rmi.sh
-              ./rmi.sh
-              """      
+              docker image prune -a -f
+              """
             }
         }
 
