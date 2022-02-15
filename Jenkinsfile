@@ -18,7 +18,7 @@ pipeline {
             steps {
               sh "echo ${DOCKER_CREDENTIALS_PSW}"
               sh "echo $DOCKER_CREDENTIALS_USR"
-              sh "docker login --username $DOCKER_CREDENTIALS --password ${DOCKER_CREDENTIALS_PSW}"
+              sh "docker login --username $DOCKER_CREDENTIALS_USR --password ${DOCKER_CREDENTIALS_PSW}"
             }
         }
 
