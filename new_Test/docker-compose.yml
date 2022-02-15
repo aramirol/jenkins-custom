@@ -1,7 +1,7 @@
 version: '3'
 services:
   jenkins:
-    image: 'jenkins/jenkins:lts-jdk11'
+    image: 'aramirol/jenkins-custom:1.4'
     container_name: 'jenkins-casare-int'
     hostname: 'jenkins-casare-int'
     restart: always
@@ -10,3 +10,5 @@ services:
       - "50000:50000"
     volumes:
       - '/data/jenkins_custom/jenkins_home:/var/jenkins_home'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '/usr/bin/docker:/usr/bin/docker'

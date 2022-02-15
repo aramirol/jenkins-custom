@@ -4,6 +4,14 @@
 
 Custom Jenkins image that is a customization of the official image by adding the necessary packages to deploy with Ansible and Terraform. In addition, packages have been added to perform testing tasks with Pytest and InSpec. It also includes packages like Kubectl and Helm for deployments on top of K8s.
 
+## Requirements
+
+To use `docker` command you must change `docker.sock` permissions on the docker service where jenkins is running. To do this, just type the following command as root:
+
+```sh
+chmod 666 /var/run/docker.sock
+```
+
 ## Build image
 
 If you want to build a new image, you must download the Dockerfile from [GitHub](https://github.com/aramirol/jenkins-custom). Then, type the following command changing the version.
