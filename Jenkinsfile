@@ -21,6 +21,16 @@ pipeline {
         }
 
       //Build image locally
+        stage("get tag image") {
+            steps {
+              script {
+                  env.TAG = readFile '.imagetag.cfg'
+              }
+              echo "${env.TAG}"
+            }
+        }
+
+      //Build image locally
         stage("build tag image") {
             steps {
               sh "docker build -q --tag aramirol/jenkins-custom:${env.TAG} ."
