@@ -20,7 +20,6 @@ pipeline {
               sh "docker login -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PWD"     
             }
         }
-    }
 
 //    stages {
 //      //Build image locally
@@ -40,7 +39,6 @@ pipeline {
 //        }
 //    }
 
-    stages {
       // Logout from hub.docker.com
         stage("logout docker hub") {
             steps {
