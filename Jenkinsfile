@@ -8,14 +8,13 @@ pipeline {
         ansiColor('xterm')
     }
 
-    environment {
-        // Login credentialsID
-        DOCKER_CREDENTIALS = credentials('hub_docker_credentials')
-    }
-
     stages {
       // Login to hub.docker.com with personal credentials
         stage("login docker hub") {
+            environment {
+              // Login credentialsID
+              DOCKER_CREDENTIALS = credentials('hub_docker_credentials')
+            }
             steps {
               sh """
               echo $DOCKER_CREDENTIALS_USR"
