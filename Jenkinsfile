@@ -70,10 +70,8 @@ pipeline {
         stage("clean temp images") {
             steps {
               sh """
-              for image in $(docker images aramirol/jenkins-custom | grep -v latest | grep -v IMAGE | awk '{print $3}') 
-              do
-              echo $image
-              done
+              chmod 770 rmi.sh
+              ./rmi.sh
               """      
             }
         }
