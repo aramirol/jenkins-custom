@@ -1,7 +1,7 @@
 version: '3'
 services:
   jenkins:
-    image: 'aramirol/jenkins-custom:1.4'
+    image: 'aramirol/jenkins-custom:latest'
     container_name: 'jenkins-casare-int'
     hostname: 'jenkins-casare-int'
     restart: always
