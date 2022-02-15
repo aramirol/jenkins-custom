@@ -18,7 +18,7 @@ pipeline {
             steps {
               sh """
               echo $DOCKER_CREDENTIALS_USR"
-              echo $DOCKER_CREDENTIALS_PWD"
+              echo hola"
               """
             }
         }
