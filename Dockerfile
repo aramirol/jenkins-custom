@@ -90,16 +90,6 @@ COPY ansible.cfg /etc/ansible/.
 # Install InSpec by Chef
 RUN curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
 
-# Install Docker-CE
-RUN apt install -y apt-transport-https ca-certificates curl software-properties-common && \
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" && \
-    apt update && \
-    apt install -y docker-ce
-
-# Add jenkins user to docker group
-RUN usermod -aG docker jenkins
-
 # Jenkins home volume
 VOLUME $JENKINS_HOME
 
