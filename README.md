@@ -1,10 +1,12 @@
 # jenkins-custom
 
 [![Docker Image CI](https://github.com/aramirol/jenkins-custom/actions/workflows/docker-image.yml/badge.svg)](https://github.com/aramirol/jenkins-custom/actions/workflows/docker-image.yml)
-[![Jenkins](https://img.shields.io/badge/jenkins_custom-latest-red?logo=jenkins&logoColor=white)](https://hub.docker.com/r/aramirol/jenkins-custom)
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/aramirol/jenkins-custom?logo=docker)](https://hub.docker.com/r/aramirol/jenkins-custom)
 
 
 Custom Jenkins image that is a customization of the official image by adding the necessary packages to deploy with Ansible and Terraform. In addition, packages have been added to perform testing tasks with Pytest and InSpec. It also includes packages like Kubectl and Helm for deployments on top of K8s.
+
+The docker image will be pushed in [https://hub.docker.com/r/aramirol/jenkins-custom](https://hub.docker.com/r/aramirol/jenkins-custom).
 
 ## Requirements
 
@@ -30,6 +32,7 @@ docker tag source:tag target:tag
 ```
 
 ## Example
+### Manual use
 ```sh
 $ git clone https://github.com/aramirol/jenkins-custom.git
 ```
@@ -57,6 +60,13 @@ $ docker push aramirol/jenkins-custom:1.0.0
 ```sh
 $ docker push aramirol/jenkins-custom:latest
 ```
+
+### Automated use
+If you prefer, you can use the automated build & push image with *Jenkins*. Before begin, you need a *Docker* environment **(K8s recomended)**.
+
+Then, create a new Pipeline en Jenkins and use the `Jenkinsfile` file. Look out that you meybe need to do few changes as the credentials.
+
+Once a pipeline is created, use the `.imagetag.cfg` file to set the new version/tag of the new image. This file will be read during the stages to set the tag version when image is bulding.
 
 ## License
 
