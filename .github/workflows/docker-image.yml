@@ -14,5 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
+    # Test if the image can be built. 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag jenkins-custom:test
+      
+    # Delete the image built before.  
+    - name: Delete the Docker image
+      run: docker rmi -f jenkins-custom:test
