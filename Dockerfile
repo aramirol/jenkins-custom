@@ -61,12 +61,12 @@ RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -
     mv kubectl /usr/bin/kubectl
 
 # Install AWS-IAM-Authenticator
-RUN curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.18.9/2020-11-02/bin/linux/amd64/aws-iam-authenticator && \
-    chmod +x ./aws-iam-authenticator && \
-    mv aws-iam-authenticator /usr/bin/aws-iam-authenticator
+#RUN curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.18.9/2020-11-02/bin/linux/amd64/aws-iam-authenticator && \
+#    chmod +x ./aws-iam-authenticator && \
+#    mv aws-iam-authenticator /usr/bin/aws-iam-authenticator
 
 # Install GCP-sdk
-RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - && apt-get update -y && apt-get install google-cloud-sdk -y
+#RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - && apt-get update -y && apt-get install google-cloud-sdk -y
 
 # Install Helm
 RUN wget https://get.helm.sh/helm-v3.4.0-linux-amd64.tar.gz && \
