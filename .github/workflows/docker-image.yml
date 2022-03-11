@@ -30,8 +30,16 @@ jobs:
         with:
           images: my-docker-hub-namespace/my-docker-hub-repository
 
+      # Read Image tag
+      - name: Read Image tag
+        id: tag
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./.imagetag.cfg
+
       # Build and push Docker tagged image
       - name: Build and push Docker image - ${{ steps.meta.outputs.version }}
+        if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
@@ -41,9 +49,10 @@ jobs:
 
       # Build and push Docker latest image
       - name: Build and push Docker image - latest
+        if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
           push: true
-          tags: aramirol/jenkins-custom:latest
+          tags: aramirol/jenkins-custom:${{ steps.tag.outputs.content }}
           labels: ${{ steps.meta.outputs.labels }}
