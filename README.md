@@ -1,7 +1,8 @@
 # jenkins-custom
 
 [![Docker Image CI](https://github.com/aramirol/jenkins-custom/actions/workflows/docker-image.yml/badge.svg)](https://github.com/aramirol/jenkins-custom/actions/workflows/docker-image.yml)
-[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/aramirol/jenkins-custom?logo=docker)](https://hub.docker.com/r/aramirol/jenkins-custom)
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/aramirol/jenkins-custom?logo=docker&logoColor=lightgrey)](https://hub.docker.com/r/aramirol/jenkins-custom)
+[![GitHub](https://img.shields.io/github/license/aramirol/jenkins-custom?logo=github&logoColor=lightgrey)](https://github.com/aramirol/jenkins-custom/blob/main/LICENSE)
 
 
 Custom Jenkins image that is a customization of the official image by adding the necessary packages to deploy with Ansible and Terraform. In addition, packages have been added to perform testing tasks with Pytest and InSpec. It also includes packages like Kubectl and Helm for deployments on top of K8s.
@@ -72,4 +73,4 @@ Once a pipeline is created, use the `.imagetag.cfg` file to set the new version/
 
 MIT License
 
-See [LICENSE](https://github.com/aramirol/jenkins-custom/blob/main/LICENSE.md) to see the full text.
+See [LICENSE](https://github.com/aramirol/jenkins-custom/blob/main/LICENSE) to see the full text.
