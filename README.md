@@ -7,6 +7,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/aramirol/jenkins-custom)
 ![GitHub last commit](https://img.shields.io/github/last-commit/aramirol/jenkins-custom)
 
+![](images/jenkins-custom.png)
 
 Custom Jenkins image that is a customization of the official image by adding the necessary packages to deploy with Ansible and Terraform. In addition, packages have been added to perform testing tasks with Pytest and InSpec. It also includes packages like Kubectl and Helm for deployments on top of K8s.
 
