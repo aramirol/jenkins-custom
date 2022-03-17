@@ -39,11 +39,11 @@ jobs:
 
       # Build and push Docker tagged image
       - name: Build and push Docker image - ${{ steps.tag.outputs.content }}
-        if: github.ref == 'refs/heads/main'
+        if: github.ref != 'refs/heads/main'
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
-          push: ${{ GITHUB_BASE_REF == 'main' }}
+          push: true
           tags: aramirol/jenkins-custom:${{ steps.tag.outputs.content }}
           labels: ${{ steps.meta.outputs.labels }}
 
@@ -53,6 +53,6 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
-          push: false
+          push: true
           tags: aramirol/jenkins-custom:latest
           labels: ${{ steps.meta.outputs.labels }}
