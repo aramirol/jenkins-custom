@@ -43,7 +43,7 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
-          push: ${{ github.branch == 'main' }}
+          push: ${{ GITHUB_BASE_REF == 'main' }}
           tags: aramirol/jenkins-custom:${{ steps.tag.outputs.content }}
           labels: ${{ steps.meta.outputs.labels }}
 
