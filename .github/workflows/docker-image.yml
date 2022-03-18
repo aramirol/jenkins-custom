@@ -34,8 +34,9 @@ jobs:
         if: ${{ steps.extract_branch.outputs.branch }} != 'main'
         run: |
           echo $PUSH_CHECK
-          echo "::set-env name=PUSH_CHECK::true"
+          echo "PUSH_CHECK=true" >> $GITHUB_ENV
           echo $PUSH_CHECK
+          echo "${{ env.PUSH_CHECK }}"
 
       # Log in to Docker Hub
       #- name: Log in to Docker Hub
