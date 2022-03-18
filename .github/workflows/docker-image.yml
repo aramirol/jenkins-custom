@@ -52,13 +52,13 @@ jobs:
 
       # Update push variable
       - name: Update push variable
-        if: github.ref == 'refs/heads/${{ steps.extract_branch.outputs.branch }}'
+        if: ${{ github.ref == 'refs/heads/${{ steps.extract_branch.outputs.branch }}' }}
         run: |
           echo $PUSH_CHECK
 
       # Update push variable
       - name: Update push variable2
-        if: github.ref != 'refs/heads/${{ steps.extract_branch.outputs.branch }}'
+        if: ${{ github.ref != 'refs/heads/${{ steps.extract_branch.outputs.branch }}' }}
         run: |
           echo $PUSH_CHECK
 
