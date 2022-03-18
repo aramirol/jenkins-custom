@@ -6,14 +6,14 @@ on:
       - main
       - feature/*
 
-env:
-  PUSH_CHECK: false
-
 jobs:
 
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    env:
+      PUSH_CHECK: false
+      
     steps:
       # Check out the repo
       - name: Check out the repo
@@ -52,7 +52,7 @@ jobs:
 
       # Check branch ref
       - name: Check branch ref
-        if: ${{ steps.extract_branch.outputs.branch }} != 'main'
+        if: ${{ steps.extract_branch.outputs.branch }} == 'main'
         run: |
           echo $PUSH_CHECK
           echo "true" >> $PUSH_CHECK
