@@ -45,23 +45,24 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           echo $PUSH_CHECK
+          echo $github.ref
           echo "true" >> $PUSH_CHECK
           echo $PUSH_CHECK
 
       # Build and push Docker tagged image
-      - name: Build and push Docker image - ${{ steps.tag.outputs.content }}
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: .
-          push: $PUSH_CHECK
-          tags: aramirol/jenkins-custom:${{ steps.tag.outputs.content }}
-          labels: ${{ steps.meta.outputs.labels }}
+      #- name: Build and push Docker image - ${{ steps.tag.outputs.content }}
+      #  uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      #  with:
+      #    context: .
+      #    push: $PUSH_CHECK
+      #    tags: aramirol/jenkins-custom:${{ steps.tag.outputs.content }}
+      #    labels: ${{ steps.meta.outputs.labels }}
 
       # Build and push Docker latest image
-      - name: Build and push Docker image - latest
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: .
-          push: $PUSH_CHECK
-          tags: aramirol/jenkins-custom:latest
-          labels: ${{ steps.meta.outputs.labels }}
+      #- name: Build and push Docker image - latest
+      #  uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      #  with:
+      #    context: .
+      #    push: $PUSH_CHECK
+      #    tags: aramirol/jenkins-custom:latest
+      #    labels: ${{ steps.meta.outputs.labels }}
