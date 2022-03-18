@@ -50,9 +50,9 @@ jobs:
       - name: Echo branch name  
         run: "echo ${{ steps.extract_branch.outputs.branch }}"
 
-      # Check branch ref
-      - name: Check branch ref
-        if: ${{ steps.extract_branch.outputs.branch }} == 'main'
+      # Update push variable
+      - name: Update push variable
+        if: ${{ steps.extract_branch.outputs.branch }} != 'main'
         run: |
           echo $PUSH_CHECK
           echo "PUSH_CHECK=true" >> $PUSH_CHECK
