@@ -55,9 +55,9 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           echo $PUSH_CHECK
-          echo "PUSH_CHECK=true" >> $PUSH_CHECK_FLAG
+          echo "PUSH_CHECK=true" >> $GITHUB_ENV
           echo $PUSH_CHECK
-          echo $PUSH_CHECK_FLAG
+          echo $GITHUB_ENV
 
       # Update push variable
       - name: Update push variable2
