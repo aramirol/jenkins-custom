@@ -57,7 +57,7 @@ jobs:
           echo $PUSH_CHECK
           echo "PUSH_CHECK=true" >> $GITHUB_ENV
           echo $PUSH_CHECK
-          echo $env.PUSH_CHECK
+          echo $env.PUSH_CHECK.output
 
       # Update push variable
       - name: Update push variable2
