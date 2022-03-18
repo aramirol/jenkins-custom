@@ -40,9 +40,13 @@ jobs:
         with:
           path: ./.imagetag.cfg
 
+      # Check branch ref
+      - name: Check branch ref
+        if: GITHUB_REF_NAME == 'main'
+        run: echo "true" >> $PUSH_CHECK
+
       # Build and push Docker tagged image
       - name: Build and push Docker image - ${{ steps.tag.outputs.content }}
-        if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
@@ -52,7 +56,6 @@ jobs:
 
       # Build and push Docker latest image
       - name: Build and push Docker image - latest
-        if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
