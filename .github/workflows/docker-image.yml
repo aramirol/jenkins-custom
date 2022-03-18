@@ -52,7 +52,7 @@ jobs:
 
       # Check branch ref
       - name: Check branch ref
-        if: ${{ steps.extract_branch.outputs.branch }} == 'main'
+        if: ${{ steps.extract_branch.outputs.branch }} != 'main'
         run: |
           echo $PUSH_CHECK
           echo "true" >> $PUSH_CHECK
