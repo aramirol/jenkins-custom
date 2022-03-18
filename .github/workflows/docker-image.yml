@@ -45,16 +45,16 @@ jobs:
         id: extract_branch
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        
+      
+      # Echo branch name
       - name: Echo branch name  
         run: "echo ${{ steps.extract_branch.outputs.branch }}"
 
       # Check branch ref
       - name: Check branch ref
-        if: github.ref == 'refs/heads/main'
+        if: ${{ steps.extract_branch.outputs.branch }} == 'main'
         run: |
           echo $PUSH_CHECK
-          echo $github.ref
           echo "true" >> $PUSH_CHECK
           echo $PUSH_CHECK
 
