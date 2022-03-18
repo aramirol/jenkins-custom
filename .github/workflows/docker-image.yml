@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PUSH_CHECK: false
-      
+
     steps:
       # Check out the repo
       - name: Check out the repo
@@ -55,7 +55,7 @@ jobs:
         if: ${{ steps.extract_branch.outputs.branch }} == 'main'
         run: |
           echo $PUSH_CHECK
-          echo "true" >> $PUSH_CHECK
+          echo "PUSH_CHECK=true" >> $PUSH_CHECK
           echo $PUSH_CHECK
 
       # Build and push Docker tagged image
