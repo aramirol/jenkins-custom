@@ -11,29 +11,13 @@ jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    env:
+      PUSH_CHECK: false
 
     steps:
       # Check out the repo
       - name: Check out the repo
         uses: actions/checkout@v2
-
-      # Extract branch name
-      - name: Extract branch name
-        id: extract_branch
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      
-      # Echo branch name
-      - name: Echo branch name  
-        run: "echo ${{ steps.extract_branch.outputs.branch }}"
-
-      # Update push variable
-      - name: Update push variable
-        if: ${{ steps.extract_branch.outputs.branch }} == 'main'
-        run: |
-          echo "PUSH_CHECK=true" >> $PUSH_CHECK
-          echo $PUSH_CHECK
-          echo "${{ env.PUSH_CHECK }}"
 
       # Log in to Docker Hub
       #- name: Log in to Docker Hub
@@ -55,6 +39,28 @@ jobs:
       #  uses: juliangruber/read-file-action@v1
       #  with:
       #    path: ./.imagetag.cfg
+
+      # Extract branch name
+      - name: Extract branch name
+        id: extract_branch
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      
+      # Echo branch name
+      - name: Echo branch name  
+        run: "echo ${{ steps.extract_branch.outputs.branch }}"
+
+      # Update push variable
+      - name: Update push variable
+        if: github.ref == 'refs/heads/${{ steps.extract_branch.outputs.branch }}'
+        run: |
+          echo $PUSH_CHECK
+
+      # Update push variable
+      - name: Update push variable2
+        if: github.ref != 'refs/heads/${{ steps.extract_branch.outputs.branch }}'
+        run: |
+          echo $PUSH_CHECK
 
       # Build and push Docker tagged image
       #- name: Build and push Docker image - ${{ steps.tag.outputs.content }}
