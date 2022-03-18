@@ -45,6 +45,8 @@ jobs:
         id: extract_branch
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        
+      - name: Echo branch name  
         echo: ${{ steps.extract_branch.outputs.branch }}
 
       # Check branch ref
