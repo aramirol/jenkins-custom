@@ -43,7 +43,10 @@ jobs:
       # Check branch ref
       - name: Check branch ref
         if: github.ref == 'refs/heads/main'
-        run: echo "true" >> $PUSH_CHECK
+        run: |
+          echo $PUSH_CHECK
+          echo "true" >> $PUSH_CHECK
+          echo $PUSH_CHECK
 
       # Build and push Docker tagged image
       - name: Build and push Docker image - ${{ steps.tag.outputs.content }}
