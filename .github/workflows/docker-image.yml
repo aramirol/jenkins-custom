@@ -42,7 +42,7 @@ jobs:
 
       # Check branch ref
       - name: Check branch ref
-        if: GITHUB_REF_NAME == 'main'
+        if: $env.GITHUB_REF_NAME == 'main'
         run: echo "true" >> $PUSH_CHECK
 
       # Build and push Docker tagged image
