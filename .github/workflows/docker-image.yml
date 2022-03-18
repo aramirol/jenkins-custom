@@ -31,7 +31,7 @@ jobs:
       - name: Update push variable
         if: ${{ steps.extract_branch.outputs.branch }} == 'main'
         run: |
-          echo "PUSH_CHECK=true" >> $GITHUB_ENV
+          echo "PUSH_CHECK=true" >> $PUSH_CHECK
           echo $PUSH_CHECK
           echo "${{ env.PUSH_CHECK }}"
 
