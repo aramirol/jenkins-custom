@@ -51,16 +51,16 @@ RUN sudo apt-get upgrade -y
 ##################################################################################################
 
 # Install Ansible repo 
-RUN sudo apt-get install software-properties-common
-RUN sudo add-apt-repository --yes --update ppa:ansible/ansible
+RUN sudo apt-get install -y software-properties-common
+RUN sudo add-apt-repository -y --update ppa:ansible/ansible
 
 # Install Terraform repo 
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-RUN sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+RUN sudo apt-add-repository -y "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 
 # Install Helm repo 
 RUN curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
-RUN do apt-get install apt-transport-https --yes
+RUN apt-get install apt-transport-https -y
 RUN echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
 
 # Install Kubectl repo
