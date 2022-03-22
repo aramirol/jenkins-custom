@@ -4,7 +4,9 @@ FROM jenkins/jenkins:jdk11
 # User I will use 
 USER root
 
-# Variables definition 
+RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
+
+# Variables definition
 ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
@@ -22,43 +24,24 @@ ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 ENV ANSIBLE_HOME /home/ansible
 ENV TERRAFORM_VERSION=1.0.9
 
-##################################################################################################
-# Install OS Packages using Package Management 
-##################################################################################################
-
-# Install packages 
-RUN apt-get update && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get install --no-install-recommends -y \
-    apt-utils \
-    bash-completion \
-    build-essential \
-    vim \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    debconf-utils \
-    file \
-    git \
-    gnupg \
-    apache2-utils \
-    libffi-dev \
-    libxslt1-dev \
-    libssl-dev \
-    libxml2-dev \
-    libkrb5-dev \
-    openssl \
-    python3 \
-    python3-dev \
-    python3-pip \
-    python3-setuptools \
-    python3-venv \
-    sudo \
-    uuid-dev \
-    unzip \
-    wget
-
-RUN sudo apt-get clean
+# Install OS packeges
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+        apt-utils \
+        bash-completion \
+        build-essential \
+        vim \
+        ca-certificates curl apt-transport-https \
+        debconf-utils \
+        file \
+        git \
+        gnupg \
+        apache2-utils \
+        libffi-dev libxslt1-dev libssl-dev libxml2-dev libkrb5-dev \
+        openssl \
+        python3 python3-dev python3-pip python3-setuptools python3-venv \
+        sudo uuid-dev unzip wget && \
+    apt-get clean
 
 # Update all packages
 RUN sudo apt-get upgrade -y
