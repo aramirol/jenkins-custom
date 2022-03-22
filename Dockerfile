@@ -4,10 +4,6 @@ FROM jenkins/jenkins:jdk11
 # User I will use 
 USER root
 
-RUN cat /etc/os-release
-
-RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
-
 # Variables definition
 ARG user=jenkins
 ARG group=jenkins
@@ -22,8 +18,11 @@ ARG ansible_uid=1001
 ARG ansible_gid=1001
 
 ENV JENKINS_HOME $JENKINS_HOME
-ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 ENV ANSIBLE_HOME /home/ansible
+
+##################################################################################################
+# Install needed packages using Package Management
+##################################################################################################
 
 # Install OS packeges
 RUN apt-get update && \
@@ -52,7 +51,7 @@ RUN sudo apt-get upgrade -y
 ##################################################################################################
 
 # Install Ansible repo 
-RUN deb http://ppa.launchpad.net/ansible/ansible/ubuntu focal main
+RUN echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/ansible.list
 RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 
 # Install Terraform repo 
@@ -73,7 +72,7 @@ RUN echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] htt
 RUN apt update -y
 
 # Install Aditional Packages 
-RUN apt-get install -y \
+RUN apt install -y \
     ansible \
     terraform \
     helm \
