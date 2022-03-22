@@ -27,6 +27,8 @@ ENV TERRAFORM_VERSION=1.0.9
 ##################################################################################################
 
 # Install packages 
+RUN apt update && rm -rf /var/lib/apt/lists/*
+
 RUN apt install --no-install-recommends -y \
     apt-utils \
     bash-completion \
@@ -41,7 +43,7 @@ RUN apt install --no-install-recommends -y \
     gnupg \
     apache2-utils \
     libffi-dev \
-    libxslt1-dev \ 
+    libxslt1-dev \
     libssl-dev \
     libxml2-dev \
     libkrb5-dev \
@@ -51,7 +53,7 @@ RUN apt install --no-install-recommends -y \
     python3-pip \
     python3-setuptools \
     python3-venv \
-    sudo \ 
+    sudo \
     uuid-dev \
     unzip \
     wget
