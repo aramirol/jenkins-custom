@@ -26,11 +26,8 @@ ENV TERRAFORM_VERSION=1.0.9
 # Install OS Packages using Package Management 
 ##################################################################################################
 
-# Update repos 
-RUN sudo apt update
-
 # Install packages 
-RUN sudo apt install --no-install-recommends -y \
+RUN apt install --no-install-recommends -y \
     apt-utils \
     bash-completion \
     build-essential \
