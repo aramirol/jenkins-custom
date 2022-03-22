@@ -51,7 +51,7 @@ RUN sudo apt-get upgrade -y
 ##################################################################################################
 
 # Install Ansible repo 
-RUN sudo apt install software-properties-common && \
+RUN sudo apt-get install software-properties-common && \
     sudo add-apt-repository --yes --update ppa:ansible/ansible
 
 # Install Terraform repo 
@@ -71,7 +71,7 @@ RUN sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://
 RUN apt update -y
 
 # Install Aditional Packages 
-RUN apt install -y \
+RUN apt-get install -y \
     ansible \
     terraform \
     helm \
