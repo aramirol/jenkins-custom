@@ -51,21 +51,21 @@ RUN sudo apt-get upgrade -y
 ##################################################################################################
 
 # Install Ansible repo 
-RUN sudo apt-get install software-properties-common && \
-    sudo add-apt-repository --yes --update ppa:ansible/ansible
+RUN sudo apt-get install software-properties-common
+RUN sudo add-apt-repository --yes --update ppa:ansible/ansible
 
 # Install Terraform repo 
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
-    sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+RUN sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 
 # Install Helm repo 
-RUN curl https://baltocdn.com/helm/signing.asc | sudo apt-key add - && \
-    sudo apt-get install apt-transport-https --yes && \
-    echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+RUN curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+RUN do apt-get install apt-transport-https --yes
+RUN echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
 
 # Install Kubectl repo
-RUN sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg && \
-    echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+RUN sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+RUN echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 # Update Aditional repos
 RUN apt update -y
