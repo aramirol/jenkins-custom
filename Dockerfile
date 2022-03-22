@@ -24,7 +24,6 @@ ARG ansible_gid=1001
 ENV JENKINS_HOME $JENKINS_HOME
 ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 ENV ANSIBLE_HOME /home/ansible
-ENV TERRAFORM_VERSION=1.0.9
 
 # Install OS packeges
 RUN apt-get update && \
@@ -53,16 +52,17 @@ RUN sudo apt-get upgrade -y
 ##################################################################################################
 
 # Install Ansible repo 
-RUN sudo apt-get install -y software-properties-common
-RUN sudo add-apt-repository -y --update ppa:ansible/ansible
+RUN deb http://ppa.launchpad.net/ansible/ansible/ubuntu focal main
+RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 
 # Install Terraform repo 
+RUN sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-RUN sudo apt-add-repository -y "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+RUN sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 
 # Install Helm repo 
 RUN curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
-RUN apt-get install apt-transport-https -y
+RUN apt-get install apt-transport-https --yes
 RUN echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
 
 # Install Kubectl repo
