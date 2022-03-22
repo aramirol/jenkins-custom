@@ -4,6 +4,8 @@ FROM jenkins/jenkins:jdk11
 # User I will use 
 USER root
 
+RUN cat /etc/os-release
+
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
 
 # Variables definition
