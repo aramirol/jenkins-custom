@@ -27,9 +27,9 @@ ENV TERRAFORM_VERSION=1.0.9
 ##################################################################################################
 
 # Install packages 
-RUN apt update && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && rm -rf /var/lib/apt/lists/*
 
-RUN apt install --no-install-recommends -y \
+RUN apt-get install --no-install-recommends -y \
     apt-utils \
     bash-completion \
     build-essential \
@@ -61,7 +61,7 @@ RUN apt install --no-install-recommends -y \
 RUN sudo apt-get clean
 
 # Update all packages
-RUN sudo apt upgrade -y
+RUN sudo apt-get upgrade -y
 
 ##################################################################################################
 # Install aditional needed repos using Package Management
