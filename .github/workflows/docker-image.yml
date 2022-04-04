@@ -11,6 +11,7 @@ jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    
 
     steps:
       # Check out the repo
@@ -34,12 +35,14 @@ jobs:
       # Read Image tag
       - name: Read Image tag
         id: tag
+        working-directory: ./Build
         uses: juliangruber/read-file-action@v1
         with:
           path: ./.imagetag.cfg
 
       # Build and push Docker latest image
       - name: Build and push Docker image - latest
+        working-directory: ./Build
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -49,6 +52,7 @@ jobs:
 
       # Build and push Docker tagged image
       - name: Build and push Docker image - ${{ steps.tag.outputs.content }}
+        working-directory: ./Build
         uses: docker/build-push-action@v2
         with:
           context: .
