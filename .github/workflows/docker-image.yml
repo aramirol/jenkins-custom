@@ -35,14 +35,12 @@ jobs:
       # Read Image tag
       - name: Read Image tag
         id: tag
-        working-directory: ./Build
         uses: juliangruber/read-file-action@v1
         with:
           path: ./.imagetag.cfg
 
       # Build and push Docker latest image
       - name: Build and push Docker image - latest
-        working-directory: ./Build
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -52,7 +50,6 @@ jobs:
 
       # Build and push Docker tagged image
       - name: Build and push Docker image - ${{ steps.tag.outputs.content }}
-        working-directory: ./Build
         uses: docker/build-push-action@v2
         with:
           context: .
