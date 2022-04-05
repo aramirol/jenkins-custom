@@ -70,8 +70,14 @@ This app use remote volumes to save its data and configurations. In the files **
 
 ```sh
 $ sudo mkdir /data/jenkins-<<env>>
+```
+```sh
 $ sudo mkdir /data/jenkins-<<env>>/jenkins_home
+```
+```sh
 $ sudo chown 1000 /data/jenkins-<<env>>
+```
+```sh
 $ sudo chown 1000 /data/jenkins-<<env>>/jenkins_home
 ```
 
