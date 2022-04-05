@@ -4,13 +4,12 @@
 
 [![Docker Image CI](https://github.com/aramirol/jenkins-custom/actions/workflows/docker-image.yml/badge.svg)](https://github.com/aramirol/jenkins-custom/actions/workflows/docker-image.yml)
 
-[![GitHub](https://img.shields.io/github/license/aramirol/jenkins-custom?logo=github&logoColor=lightgrey)](https://github.com/aramirol/jenkins-custom/blob/main/LICENSE)
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/aramirol/jenkins-custom?logo=docker&logoColor=lightgrey)](https://hub.docker.com/r/aramirol/jenkins-custom)
+[![Docker Image Size](https://img.shields.io/docker/image-size/aramirol/jenkins-custom/latest?logo=jenkins&logoColor=lightgrey)](https://hub.docker.com/r/aramirol/jenkins-custom)
+[![Docker Pulls](https://img.shields.io/docker/pulls/aramirol/jenkins-custom?color=success&logo=docker&logoColor=lightgrey)](https://hub.docker.com/r/aramirol/jenkins-custom)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/aramirol/jenkins-custom?logo=github&logoColor=lightgrey)](https://github.com/aramirol/jenkins-custom)
 [![GitHub last commit](https://img.shields.io/github/last-commit/aramirol/jenkins-custom?logo=github&logoColor=lightgrey)](https://github.com/aramirol/jenkins-custom)
-
-[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/aramirol/jenkins-custom?logo=docker&logoColor=lightgrey)](https://hub.docker.com/r/aramirol/jenkins-custom)
-[![Docker Pulls](https://img.shields.io/docker/pulls/aramirol/jenkins-custom?color=success&logo=docker&logoColor=lightgrey)](https://hub.docker.com/r/aramirol/jenkins-custom)
-[![Docker Image Size](https://img.shields.io/docker/image-size/aramirol/jenkins-custom/latest?logo=jenkins&logoColor=lightgrey)](https://hub.docker.com/r/aramirol/jenkins-custom)
+[![GitHub](https://img.shields.io/github/license/aramirol/jenkins-custom?logo=github&logoColor=lightgrey)](https://github.com/aramirol/jenkins-custom/blob/main/LICENSE)
 
 
 Custom Jenkins image that is a customization of the **[official image](https://hub.docker.com/r/jenkins/jenkins)** by adding the necessary packages to deploy with Ansible and Terraform. In addition, packages have been added to perform testing tasks with Pytest and InSpec. It also includes packages like Kubectl and Helm for deployments on top of K8s.
