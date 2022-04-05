@@ -3,6 +3,7 @@
 ![](images/jenkins-custom.png)
 
 [![Docker Image CI](https://github.com/aramirol/jenkins-custom/actions/workflows/docker-image.yml/badge.svg)](https://github.com/aramirol/jenkins-custom/actions/workflows/docker-image.yml)
+[![git-sync](https://github.com/aramirol/jenkins-custom/actions/workflows/git-sync.yml/badge.svg)](https://github.com/aramirol/jenkins-custom/actions/workflows/git-sync.yml)
 
 [![Docker Image Version (latest by date)](https://img.shields.io/docker/v/aramirol/jenkins-custom?logo=docker&logoColor=lightgrey)](https://hub.docker.com/r/aramirol/jenkins-custom)
 [![Docker Image Size](https://img.shields.io/docker/image-size/aramirol/jenkins-custom/latest?logo=jenkins&logoColor=lightgrey)](https://hub.docker.com/r/aramirol/jenkins-custom)
